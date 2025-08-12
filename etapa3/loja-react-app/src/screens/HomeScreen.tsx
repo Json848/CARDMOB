@@ -1,12 +1,28 @@
-import React from "react";
-import { View, Text } from "react-native"
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
-function HomeScreen(){
-
-    return (
-        <View>
-            <Text>Home Screen</Text>
-        </View>
-    )
+import { useTheme } from '../context/ThemeContext';
+function HomeScreen() {
+    const { theme, toggleTheme } = useTheme();
+  return (
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
+      <Text
+        style={{ color: theme.colors.text, marginBottom: theme.spacing(1)}}
+      >
+        Home Screen
+      </Text>
+      <Button title='alterna tema' color={theme.colors.primary} onPress={toggleTheme}/>
+    </View>
+  );
 }
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
