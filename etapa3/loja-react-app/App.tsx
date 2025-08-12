@@ -1,14 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text,  Button, View } from 'react-native';
+import { StyleSheet, Text, Button, View } from 'react-native';
 import { ThemeProvider } from './src/context/ThemeContext';
 import HomeScreen from './src/screens/HomeScreen';
+import RootNavigator from './src/navigation/RootNavigator';
 
 export default function App() {
-  return( 
+  return (
     <ThemeProvider>
-        <HomeScreen />;
+      <RootNavigator />
     </ThemeProvider>
-)
+  );
 }
 
 const styles = StyleSheet.create({
