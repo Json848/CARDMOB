@@ -1,19 +1,28 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { useTheme } from '../context/ThemeContext'; // Nova
 
-import { useTheme } from '../context/ThemeContext';
-function HomeScreen() {
-    const { theme, toggleTheme } = useTheme();
+function HomeScreen({ navigation }: any) {
+  const { theme, toggleTheme } = useTheme();
   return (
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <Text
-        style={{ color: theme.colors.text, marginBottom: theme.spacing(1)}}
+        style={{ color: theme.colors.text, marginBottom: theme.spacing(1) }}
       >
         Home Screen
       </Text>
-      <Button title='alterna tema' color={theme.colors.primary} onPress={toggleTheme}/>
+      <Button
+        title="Alternar Tema"
+        color={theme.colors.primary}
+        onPress={toggleTheme}
+      />
+      <Button
+        title="Ir para Detalhes"
+        onPress={() => navigation.navigate('Details')}
+      />
+      <Button title="Logins" onPress={() => navigation.navigate('Logins')} />
     </View>
   );
 }
