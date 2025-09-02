@@ -23,7 +23,7 @@ function TabNavigator() {
           }
           return <FontAwesome name={iconName} size={size} color={color} />;
         },
-        tabActiveTintColor: 'red',
+        tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'grey',
         headerShown: false,
       })}
