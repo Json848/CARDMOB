@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RootStackParamList, TabParamList } from './types';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 // Tela pública.
+import CatalogScreen from '../screens/catalog/CatalogScreen';
 import HomeScreen from '../screens/HomeScreen';
 // importar depois que implementar: DetailsScreen, SettingsScreen
 import RegisterScreen from '../screens/RegisterScreen';
@@ -18,8 +19,8 @@ function TabNavigator() {
       screenOptions={({ route, navigation }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home';
+          if (route.name === 'Catalog') {
+            iconName = focused ? 'inbox' : 'inbox';
           }
           return <FontAwesome name={iconName} size={size} color={color} />;
         },
@@ -28,7 +29,7 @@ function TabNavigator() {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Catalog" component={CatalogScreen} />
       <Tab.Screen name="Settings" component={HomeScreen} />
       <Tab.Screen name="Register" component={RegisterScreen} />
     </Tab.Navigator>
