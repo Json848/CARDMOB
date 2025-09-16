@@ -6,6 +6,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 // Tela pública.
 import CatalogScreen from '../screens/catalog/CatalogScreen';
 import HomeScreen from '../screens/HomeScreen';
+import CartScreen from '../screens/cart/CartScreen';
 // importar depois que implementar: DetailsScreen, SettingsScreen
 import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
@@ -22,6 +23,15 @@ function TabNavigator() {
           if (route.name === 'Catalog') {
             iconName = focused ? 'inbox' : 'inbox';
           }
+          else if (route.name === 'Settings') {
+            iconName = focused ? 'gear' : 'gear';
+          }
+          else if (route.name === 'Register') {
+            iconName = focused ? 'user-plus' : 'user-plus';
+          }
+          else if (route.name === 'Cart') {
+            iconName = focused ? 'shopping-cart' : 'shopping-cart';
+          } 
           return <FontAwesome name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'red',
@@ -36,6 +46,7 @@ function TabNavigator() {
       />
       <Tab.Screen name="Settings" component={HomeScreen} />
       <Tab.Screen name="Register" component={RegisterScreen} />
+      <Tab.Screen name="Cart" component={CartScreen} options={{title: 'Seu Carrinho'}}/>
     </Tab.Navigator>
   );
 }
