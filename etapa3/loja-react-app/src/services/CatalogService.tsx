@@ -1,8 +1,9 @@
-const API_URL = 'http://10.81.205.19:5000'
+import Constants from 'expo-constants';
+const { apiUrl } = Constants.expoConfig?.extra || {};
 
 export async function getCatalog() : Promise<any[]> {
   try {
-    const response = await fetch(`${API_URL}/api/catalog`);
+    const response = await fetch(`${apiUrl}/api/catalog`);
     const data = await response.json();
     console.log(data);
     return data.catalog;

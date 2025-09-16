@@ -29,7 +29,11 @@ function TabNavigator() {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Catalog" component={CatalogScreen} />
+      <Tab.Screen 
+      name="Catalog" 
+      component={CatalogScreen} 
+      options={{ title: 'Menu' }}
+      />
       <Tab.Screen name="Settings" component={HomeScreen} />
       <Tab.Screen name="Register" component={RegisterScreen} />
     </Tab.Navigator>
