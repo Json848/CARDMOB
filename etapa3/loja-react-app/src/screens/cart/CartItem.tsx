@@ -3,9 +3,10 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useShop } from '../../context/ShopContext';
 
 const CartItem = ({ item }: any) => {
-  const { addToCart } = useShop();
+  const { addToCart, removeFromCart } = useShop();
 
   const handleRemove = () => {
+    removeFromCart(item.id);
     console.log('exclui produto');
   };
 
@@ -19,7 +20,7 @@ const CartItem = ({ item }: any) => {
             R$ {(item.price * item.quantity).toFixed(2)}
           </Text>
           <TouchableOpacity
-            onPress={() => addToCart(item)}
+            onPress={() => addToCart(item, -1)}
             style={styles.button}
           >
             <Text style={styles.buttonText}>-</Text>
@@ -34,7 +35,7 @@ const CartItem = ({ item }: any) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => handleRemove()}
+            onPress={() => handleRemove(item)}
             style={styles.button}
           >
             <Text style={styles.buttonText}>Remover</Text>
