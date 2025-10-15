@@ -1,13 +1,13 @@
-import React, { use, useContext, useEffect } from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Text, Button } from 'react-native';
 
 import CatalogCard from './CatalogCard';
 import { getCatalog } from '../../services/CatalogService';
+import { useShop } from '../../context/ShopContext';
 
 const CatalogScreen = ({ navigation }: any) => {
   const [catalog, setCatalog] = useState<any[]>([]);
-  
+  const { addToCart } = useShop();
   useEffect(() => {
     const fetchCatalog = async () => {
      try {
@@ -40,6 +40,7 @@ const CatalogScreen = ({ navigation }: any) => {
 
   const handleBuyPress = (product: any) => {
     console.log(product);
+    addToCart(product);
   };
 
   const renderItem = ({ item }: any) => (
@@ -65,6 +66,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
-    backgroundColor: 'f8f8f8',
+    backgroundColor: '#f8f8f8',
   },
 });

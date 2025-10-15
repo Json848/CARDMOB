@@ -4,12 +4,15 @@ import { ThemeProvider } from './src/context/ThemeContext';
 import HomeScreen from './src/screens/HomeScreen';
 import RootNavigator from './src/navigation/RootNavigator';
 import { AuthProvider } from './src/context/AuthContext';
+import {ShopProvider} from './src/context/ShopContext';
 
 export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <RootNavigator />
+        <ShopProvider>
+          <RootNavigator />
+        </ShopProvider>
       </AuthProvider>
     </ThemeProvider>
   );
