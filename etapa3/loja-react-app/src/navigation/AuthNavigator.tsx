@@ -6,6 +6,7 @@ import { AuthStackParamList, AuthTabParamList } from './types';
 // Tela pública.
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/auth/ProfileScreen';
+import CheckoutScreen from '../screens/cart/CheckoutScreen';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 const Tab = createBottomTabNavigator<AuthTabParamList>();
@@ -35,6 +36,11 @@ function AuthStackNavigator() {
         name="Details"
         component={HomeScreen}
         options={{ title: 'Detalhes' }}
+      />
+      <Stack.Screen
+        name="Checkout"
+        component={CheckoutScreen}
+        options={{ title: 'Finalizar Pedido' }}
       />
     </Stack.Navigator>
   );

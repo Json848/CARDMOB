@@ -10,6 +10,7 @@ import CartScreen from '../screens/cart/CartScreen';
 // importar depois que implementar: DetailsScreen, SettingsScreen
 import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
+import CheckoutScreen from '../screens/cart/CheckoutScreen';
 
 const AppStack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -22,16 +23,13 @@ function TabNavigator() {
           let iconName;
           if (route.name === 'Catalog') {
             iconName = focused ? 'inbox' : 'inbox';
-          }
-          else if (route.name === 'Settings') {
+          } else if (route.name === 'Settings') {
             iconName = focused ? 'gear' : 'gear';
-          }
-          else if (route.name === 'Register') {
+          } else if (route.name === 'Register') {
             iconName = focused ? 'user-plus' : 'user-plus';
-          }
-          else if (route.name === 'Cart') {
+          } else if (route.name === 'Cart') {
             iconName = focused ? 'shopping-cart' : 'shopping-cart';
-          } 
+          }
           return <FontAwesome name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: 'red',
@@ -39,14 +37,22 @@ function TabNavigator() {
         headerShown: false,
       })}
     >
-      <Tab.Screen 
-      name="Catalog" 
-      component={CatalogScreen} 
-      options={{ title: 'Menu' }}
+      <Tab.Screen
+        name="Catalog"
+        component={CatalogScreen}
+        options={{ title: 'Menu' }}
       />
       <Tab.Screen name="Settings" component={HomeScreen} />
-      <Tab.Screen name="Register" component={RegisterScreen} />
-      <Tab.Screen name="Cart" component={CartScreen} options={{title: 'Seu Carrinho'}}/>
+      <Tab.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{ title: 'Cadastrar', headerShown: true }}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{ title: 'Seu Carrinho', headerShown: true }}
+      />
     </Tab.Navigator>
   );
 }
@@ -68,6 +74,11 @@ function StackNavigator() {
         name="Logins"
         component={LoginScreen}
         options={{ title: 'Acessar' }}
+      />
+      <AppStack.Screen
+        name="Checkout"
+        component={CheckoutScreen}
+        options={{ title: 'Finalizar Pedido' }}
       />
     </AppStack.Navigator>
   );

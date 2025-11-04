@@ -5,68 +5,65 @@ import {
   FlatList,
   StyleSheet,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 import CartItem from './CartItem';
+import { ShopContext } from '../../context/ShopContext';
 import { useShop } from '../../context/ShopContext';
 
 const CartScreen = ({ navigation }: any) => {
-  const { cartItems } = useShop();
-  const renderItem = ({ item }: any) =>
-    <CartItem item={item} />;
+  const { cartItems, clearCart, getTotalPrice } = useShop();
 
-  const handleCheckout = () => {
-    console.log('Finalizar compra');
+  const renderItem = ({ item }: any) => <CartItem item={item} />;
 
-  }
   return (
-    <View>
-      <View style={styles.container}>
-        {cartItems.length === 0 ? (
-          <View style={styles.container}>
-            <Text style={styles.empty}>Seu carrinho está vazio.</Text>
-            <Button
-              title='Ver produtos'
+    <View style={styles.container}>
+      {cartItems.length === 0 ? (
+        <View style={styles.container}>
+          <Text style={styles.empty}>Seu carrinho está vazio.</Text>
+          <Button
+            title="Ver produtos"
+            onPress={() => navigation.navigate('Catalog')}
+          />
+        </View>
+      ) : (
+        <View style={styles.listContainer}>
+          {/* <Text>Carrinho de compras</Text> */}
+          <FlatList
+            data={cartItems}
+            renderItem={renderItem}
+            keyExtractor={(item: any) => item.id.toString()}
+          />
+          <View style={styles.totalContainer}>
+            <Text style={styles.totalText}>Total R$ {getTotalPrice()}</Text>
+            <TouchableOpacity
+              onPress={clearCart}
+              style={styles.clearButton}
+            >
+              <Text style={styles.clearButtonText}>Limpar carrinho</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
               onPress={() => navigation.navigate('Catalog')}
-            />
+              style={styles.continueButton}
+            >
+              <Text style={styles.continueButtonText}>Continuar comprando</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Checkout')}
+              style={styles.checkoutButton}
+            >
+              <Text style={styles.checkoutButtonText}>Concluir Pedido</Text>
+            </TouchableOpacity>
           </View>
-        ) : (
-          <View style={styles.listContainer}>
-            {/* <Text>Carrinho de compras</Text> */}
-            <FlatList
-              data={cartItems}
-              renderItem={renderItem}
-              keyExtractor={(item: any) => item.id.toString()}
-            />
-            <View style={styles.totalContainer}>
-              <Text style={styles.totalText}>Total R$ {handleCheckout}</Text>
-              <TouchableOpacity
-                onPress={handleCheckout}
-                style={styles.clearButton}
-              >
-                <Text style={styles.clearButtonText}>Limpar carrinho</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Catalog')}
-                style={styles.continueButton}
-              >
-                <Text style={styles.continueButtonText}>Continuar comprando</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Catalog')}
-                style={styles.checkoutButton}
-              >
-                <Text style={styles.checkoutButtonText}>Concluir Pedido</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )
-        }
-      </View>
+        </View>
+      )}
     </View>
   );
 };
+export default CartScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -124,4 +121,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-export default CartScreen;
