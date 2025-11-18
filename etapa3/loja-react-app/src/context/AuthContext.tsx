@@ -1,11 +1,14 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getTokenData } from '../services/authServices'
 
 type AuthContextType = {
   user: { token: string } | null;
   login: (token: string) => Promise<void>;
   logout: () => Promise<void>;
   loading: boolean;
+  getUserDataFromToken: (token: string | null) => Promise<any[]>; // novo
+  userData: Promise<any[]>; // novo
 };
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
@@ -15,6 +18,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // Lógica do context provider.
   const [user, setUser] = useState<{ token: string } | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState<any[]>([]); // novo
 
   useEffect(() => {
     const loadUser = async () => {
@@ -25,6 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setLoading(false);
     };
     loadUser();
+    getUserDataFromToken(); 
   }, []);
 
   const login = async (token: string) => {
@@ -36,9 +41,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     await AsyncStorage.removeItem('token');
     setUser(null);
   };
+   const getUserDataFromToken = async () => {
+     const token = await AsyncStorage.getItem('token');
+     const tokenData = getTokenData(token);
+     setUserData(tokenData);
+   };
 
   return (
-    <AuthContext value={{ user, login, logout, loading }}>
+    <AuthContext value={{ user, login, logout, loading, userData }}>
       {children}
     </AuthContext>
   );
