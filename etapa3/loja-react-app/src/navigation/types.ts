@@ -11,6 +11,7 @@ export type RootStackParamList = {
   Details: { itemId: number };
   Logins: undefined;
   Checkout: undefined;
+  OrderInfo: undefined;
 };
 export type AuthTabParamList = {
   Home: undefined;
@@ -20,4 +21,5 @@ export type AuthStackParamList = {
   Tabs: NavigatorScreenParams<AuthTabParamList>;
   Details: { itemId: number };
   Checkout: undefined;
+  OrderInfo: undefined;
 };

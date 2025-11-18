@@ -7,6 +7,7 @@ import { AuthStackParamList, AuthTabParamList } from './types';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/auth/ProfileScreen';
 import CheckoutScreen from '../screens/cart/CheckoutScreen';
+import OrderInfoScreen from '../screens/cart/OrderInfoScreen';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 const Tab = createBottomTabNavigator<AuthTabParamList>();
@@ -41,6 +42,11 @@ function AuthStackNavigator() {
         name="Checkout"
         component={CheckoutScreen}
         options={{ title: 'Finalizar Pedido' }}
+      />
+      <Stack.Screen
+        name="OrderInfo"
+        component={OrderInfoScreen}
+        options={{ title: 'Informações do Pedido' }}
       />
     </Stack.Navigator>
   );

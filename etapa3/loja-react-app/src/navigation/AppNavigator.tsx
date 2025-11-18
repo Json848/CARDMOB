@@ -11,6 +11,7 @@ import CartScreen from '../screens/cart/CartScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
 import CheckoutScreen from '../screens/cart/CheckoutScreen';
+import OrderInfoScreen from '../screens/cart/OrderInfoScreen';
 
 const AppStack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -20,7 +21,7 @@ function TabNavigator() {
     <Tab.Navigator
       screenOptions={({ route, navigation }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+          let iconName: React.ComponentProps<typeof FontAwesome>['name'] = 'question-circle'; // Default icon
           if (route.name === 'Catalog') {
             iconName = focused ? 'inbox' : 'inbox';
           } else if (route.name === 'Settings') {
@@ -80,6 +81,12 @@ function StackNavigator() {
         component={CheckoutScreen}
         options={{ title: 'Finalizar Pedido' }}
       />
+      <AppStack.Screen
+        name="OrderInfo"
+        component={OrderInfoScreen}
+        options={{ title: 'Informações do Pedido' }}
+      />
+      
     </AppStack.Navigator>
   );
 }
